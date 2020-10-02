@@ -1,6 +1,8 @@
 package controller;
 
+import dao.LocationDAO;
 import dao.SurvivorDAO;
+import model.Location;
 import model.Survivor;
 
 public class SurvivorController {
@@ -14,9 +16,11 @@ public class SurvivorController {
 	public void insert(String nome, int idade, String sexo, Double latitude, Double longitude) {
 		Survivor survivor = new Survivor(nome, idade, sexo);
 		survivorDAO.insertSurvivor(survivor);
-		LocationController locationController = new LocationController();
-		locationController.insertLocation(latitude, longitude, survivor);
-		locationController.close();
+		
+		Location location = new Location(latitude, longitude, survivor);
+		LocationDAO locationDAO = new LocationDAO();
+		locationDAO.insertLocation(location);
+		locationDAO.close();
 	}
 	
 	public Survivor getSurvivor(int primaryKey) {
