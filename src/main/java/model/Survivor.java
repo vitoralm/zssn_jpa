@@ -29,6 +29,9 @@ public class Survivor {
 	
 	@OneToMany(mappedBy = "survivor")
 	private List<Location> locations;
+	
+	@OneToMany(mappedBy = "survivor")
+	private List<SurvivorInfectionReport> infectionReports;
 
 	public Survivor() {}
 	
@@ -37,6 +40,8 @@ public class Survivor {
 		this.age = age;
 		this.gender = gender;
 		this.locations = new ArrayList<Location>();
+		this.infectionReports = new ArrayList<SurvivorInfectionReport>();
+		
 	}
 
 	public List<Location> getLocations() {

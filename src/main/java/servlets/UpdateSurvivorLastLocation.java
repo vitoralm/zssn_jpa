@@ -8,19 +8,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import controller.LocationController;
 import controller.SurvivorController;
+import model.Survivor;
 
 /**
- * Servlet implementation class Cadastrar
+ * Servlet implementation class UpdateSurvivorLastLocation
  */
-public class Register extends HttpServlet {
+public class UpdateSurvivorLastLocation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Register() {
+    public UpdateSurvivorLastLocation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,22 +30,19 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String nome = request.getParameter("nome");
-		String idade = request.getParameter("idade");
-		String sexo = request.getParameter("genero");
-		String ultimaLatitude = request.getParameter("latitude");
-		String ultimaLongitude = request.getParameter("longitude");
-
+		String id = request.getParameter("idsurvivor");
+		String latitude = request.getParameter("latitude");
+		String longitude = request.getParameter("longitude");
+		
 		SurvivorController survivorController = new SurvivorController();
 		PrintWriter writer = response.getWriter();
+		
 		try {
-			survivorController.insert(nome, Integer.parseInt(idade), sexo, Double.parseDouble(ultimaLatitude), Double.parseDouble(ultimaLongitude));
+			survivorController.updateSurvivorLastLocationById(Integer.parseInt(id), Double.parseDouble(latitude), Double.parseDouble(longitude));
 		} catch (Exception e) {
 			e.getMessage();
-			writer.printf("Erro ao cadastrar sobrevivente! =(");
 		} finally {
 			survivorController.close();
-			//writer.printf("Sobrevivente cadastrado com sucesso!");
 			writer.printf("<a href='index.jsp'>Voltar para o início</a>");
 		}
 		writer.close();

@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
+<title>ZSSN</title>
 </head>
 <body>
 	<div class="menu">
 		<ul>
   			<li><a href="registerUser.jsp">Cadastrar</a> </li>
-  			<li> Item two </li>
+  			<li><a href="updateUserLastLocation.jsp"> Atualizar última localização </a></li>
 		</ul>
 	</div>
 	<div id="container">
