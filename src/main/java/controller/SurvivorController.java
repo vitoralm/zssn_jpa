@@ -15,9 +15,16 @@ public class SurvivorController {
 		
 	}
 	
-	public void insert(String nome, int idade, String sexo, Double latitude, Double longitude) {
+	public Survivor createSurvivor(String name, int age, String gender) {
 		
-		Survivor survivor = new Survivor(nome, idade, sexo);
+		Survivor survivor = new Survivor(name, age, gender);
+		return survivor;
+		
+	}
+	
+	public void insert(String name, int age, String gender, Double latitude, Double longitude) {
+		
+		Survivor survivor = createSurvivor(name, age, gender);
 		survivorDAO.insertSurvivor(survivor);
 		
 		Location location = new Location(latitude, longitude, survivor);
@@ -39,6 +46,13 @@ public class SurvivorController {
 		Location location = new Location(latitude, longitude, survivor);
 		LocationDAO locationDAO = new LocationDAO();
 		locationDAO.insertLocation(location);
+		locationDAO.close();
+		
+	}
+	
+	public void mergeSurvivor(Survivor survivor) {
+		
+		survivorDAO.mergeSurvivor(survivor);
 		
 	}
 	

@@ -27,13 +27,16 @@ public class Survivor {
 	@Column
 	private String gender;
 	
-	@OneToMany(mappedBy = "survivor")
+	@OneToMany(mappedBy = "survivorLocation")
 	private List<Location> locations;
 	
-	@OneToMany(mappedBy = "survivor")
+	@OneToMany(mappedBy = "survivorInfectionReporter")
 	private List<SurvivorInfectionReport> infectionReports;
 
-	public Survivor() {}
+	@OneToMany(mappedBy = "survivorInfectionReported")
+	private List<SurvivorInfectionReport> infectionsReported;
+	
+	Survivor() {}
 	
 	public Survivor(String name, int age, String gender) {
 		this.name = name;
@@ -43,6 +46,22 @@ public class Survivor {
 		this.infectionReports = new ArrayList<SurvivorInfectionReport>();
 		
 	}
+	
+	public int getId() {
+		return id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public String getGender() {
+		return gender;
+	}
 
 	public List<Location> getLocations() {
 		return locations;
@@ -50,6 +69,22 @@ public class Survivor {
 
 	public Location getLastLocation() {
 		return locations.get(locations.size() - 1);
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 }

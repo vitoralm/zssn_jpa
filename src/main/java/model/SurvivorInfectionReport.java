@@ -17,7 +17,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "survivor_infection_report")
+@Table(name = "survivorinfectionreport")
 public class SurvivorInfectionReport {
 	
 	@Id
@@ -26,11 +26,11 @@ public class SurvivorInfectionReport {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "survivor_reporter_id")
-	private Survivor survivorReporter;
+	private Survivor survivorInfectionReporter;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "survivor_reported_id")
-	private Survivor survivorReported;
+	private Survivor survivorInfectionReported;
 	
 	@Column(name = "location_date")
 	private Timestamp locationDate;
@@ -38,7 +38,11 @@ public class SurvivorInfectionReport {
 	@Transient
 	private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	
+	SurvivorInfectionReport() {}
+	
 	public SurvivorInfectionReport(Survivor survivorReporter, Survivor survivorReported) {
+		this.survivorInfectionReported = survivorReported;
+		this.survivorInfectionReporter = survivorReporter;
 		try {
 			Date data = Calendar.getInstance().getTime();
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
@@ -48,14 +52,15 @@ public class SurvivorInfectionReport {
 		} catch (Exception e) {
 			e.getMessage();
 		}
+		
 	}
 
 	public Survivor getSurvivorReporter() {
-		return survivorReporter;
+		return survivorInfectionReporter;
 	}
 
 	public Survivor getSurvivorReported() {
-		return survivorReported;
+		return survivorInfectionReported;
 	}
 	
 }

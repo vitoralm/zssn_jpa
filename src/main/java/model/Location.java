@@ -32,7 +32,7 @@ public class Location {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "survivor_id")
-	private Survivor survivor;
+	private Survivor survivorLocation;
 	
 	@Column(name = "location_date")
 	private Timestamp locationDate;
@@ -40,12 +40,12 @@ public class Location {
 	@Transient
 	private final SimpleDateFormat DATE_TIME_FORMAT = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-	public Location() {}
+	Location() {}
 	
 	public Location(Double latitude, Double longitude, Survivor survivor) {
 		this.latitude = latitude;
 		this.longitude = longitude;
-		this.survivor = survivor;
+		this.survivorLocation = survivor;
 		try {
 			Date data = Calendar.getInstance().getTime();
 			DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");

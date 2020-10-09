@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.LocationController;
 import controller.SurvivorController;
+import model.Survivor;
 
 /**
  * Servlet implementation class Cadastrar
@@ -30,24 +31,47 @@ public class Register extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String nome = request.getParameter("nome");
-		String idade = request.getParameter("idade");
-		String sexo = request.getParameter("genero");
-		String ultimaLatitude = request.getParameter("latitude");
-		String ultimaLongitude = request.getParameter("longitude");
+		String id = request.getParameter("id");
+		String name = request.getParameter("name");
+		String age = request.getParameter("age");
+		String gender = request.getParameter("gender");
+		String lastLatitude = request.getParameter("latitude");
+		String lastLongitude = request.getParameter("longitude");
 
 		SurvivorController survivorController = new SurvivorController();
 		PrintWriter writer = response.getWriter();
-		try {
-			survivorController.insert(nome, Integer.parseInt(idade), sexo, Double.parseDouble(ultimaLatitude), Double.parseDouble(ultimaLongitude));
-		} catch (Exception e) {
-			e.getMessage();
-			writer.printf("Erro ao cadastrar sobrevivente! =(");
-		} finally {
-			survivorController.close();
-			//writer.printf("Sobrevivente cadastrado com sucesso!");
-			writer.printf("<a href='index.jsp'>Voltar para o início</a>");
+		
+		if (id == "" || id == null) {
+			
+			try {
+				survivorController.insert(name, Integer.parseInt(age), gender, Double.parseDouble(lastLatitude), Double.parseDouble(lastLongitude));
+			} catch (Exception e) {
+				e.getMessage();
+				writer.printf("Erro ao cadastrar sobrevivente! =(");
+			} finally {
+				survivorController.close();
+				writer.printf("<a href='index.jsp'>Voltar para o início</a>");
+			}
+			
+		} else {
+			Survivor survivor = survivorController.getSurvivorById(Integer.parseInt(id));
+			survivor.setName(name);
+			survivor.setAge(Integer.parseInt(age));
+			survivor.setGender(gender);
+			
+			try {
+				survivorController.mergeSurvivor(survivor);
+				survivorController.updateSurvivorLastLocationById(survivor.getId(), Double.parseDouble(lastLatitude), Double.parseDouble(lastLongitude));
+			} catch (Exception e) {
+				e.getMessage();
+				writer.printf("Erro ao atualizar sobrevivente! =(");
+			} finally {
+				survivorController.close();
+				writer.printf("<a href='index.jsp'>Voltar para o início</a>");
+			}
+			
 		}
+		
 		writer.close();
 		
 	}

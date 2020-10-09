@@ -1,6 +1,7 @@
 package main;
 
 import model.Survivor;
+import model.SurvivorInfectionReport;
 
 import java.security.Timestamp;
 import java.text.DateFormat;
@@ -19,32 +20,18 @@ public class main {
 
 	public static void main(String[] args) {
 		
-//		Survivor survivor = new Survivor("Pedro", 22, "Masculino");
-//		Location location_a = new Location(1.75, 2.25, survivor);
-//		Location location_b = new Location(19.75, 13.35, survivor);
-		
-		//survivor.setUltLocation(location_a);
-		//survivor.setUltLocation(location_b);
-		
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("projeto_jpa_zssn");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
+
+		Survivor survivorVitor = entityManager.find(Survivor.class, 19);
+		Survivor survivorSam = entityManager.find(Survivor.class, 21);
 		
-//		EntityTransaction transaction = entityManager.getTransaction();
-//		transaction.begin();
-//		entityManager.persist(survivor);
-//		entityManager.persist(location_a);
-//		entityManager.persist(location_b);
-//		transaction.commit();
+		SurvivorInfectionReport sir = new SurvivorInfectionReport(survivorVitor, survivorSam);
 		
-		Survivor survivor2 = entityManager.find(Survivor.class, 6);
-		System.out.println("Ultima localização: " + survivor2.getLastLocation().getLatitude() + " " + survivor2.getLastLocation().getLongitude());
-		
-		System.out.println("Todas as localizações:");
-		for (int i = 0; i < survivor2.getLocations().size(); i++) {
-			System.out.println(survivor2.getLocations().get(i).getLatitude());
-			System.out.println(survivor2.getLocations().get(i).getLongitude());
-			System.out.println(survivor2.getLocations().get(i).getLocationDate());
-		}
+		EntityTransaction transacao = entityManager.getTransaction();
+		transacao.begin();
+		entityManager.persist(sir);
+		transacao.commit();
 		
 		entityManager.close();
 		entityManagerFactory.close();

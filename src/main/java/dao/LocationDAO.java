@@ -13,11 +13,10 @@ public class LocationDAO extends DAO {
 		try {
 			transaction.begin();
 			entityManager.persist(location);
+			transaction.commit();
 		} catch (Exception e) {
 			transaction.rollback();
 			e.getMessage();
-		} finally {
-			transaction.commit();
 		}
 		
 	}

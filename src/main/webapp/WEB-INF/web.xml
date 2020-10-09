@@ -16,6 +16,12 @@
   	<description></description>
   	<servlet-class>servlets.UpdateSurvivorLastLocation</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>LocateSurvivorToUpdate</servlet-name>
+  	<display-name>LocateSurvivorToUpdate</display-name>
+  	<description></description>
+  	<servlet-class>servlets.LocateSurvivorToUpdate</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>Register</servlet-name>
   	<url-pattern>/Register</url-pattern>
@@ -23,5 +29,9 @@
   <servlet-mapping>
   	<servlet-name>UpdateSurvivorLastLocation</servlet-name>
   	<url-pattern>/UpdateSurvivorLastLocation</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>LocateSurvivorToUpdate</servlet-name>
+  	<url-pattern>/LocateSurvivorToUpdate</url-pattern>
   </servlet-mapping>
 </web-app>

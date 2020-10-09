@@ -16,16 +16,31 @@ public class SurvivorDAO extends DAO{
 	public void insertSurvivor(Survivor survivor) {
 		
 		EntityTransaction transaction = getTransaction();
+		
 		try {
 			transaction.begin();
 			entityManager.persist(survivor);
+			transaction.commit();
 		} catch (Exception e) {
 			transaction.rollback();
 			e.getMessage();
-		} finally {
-			transaction.commit();
 		}
 
+	}
+	
+	public void mergeSurvivor(Survivor survivor) {
+		
+		EntityTransaction transaction = getTransaction();
+		
+		try {
+			transaction.begin();
+			entityManager.merge(survivor);
+			transaction.commit();
+		} catch (Exception e) {
+			transaction.rollback();
+			e.getMessage();
+		}
+		
 	}
 	
 }
