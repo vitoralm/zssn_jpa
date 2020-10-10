@@ -12,6 +12,7 @@
 		<ul>
   			<li><a href="registerSurvivor.jsp">Register</a> </li>
   			<li><a href="UpdateSurvivorSearch.jsp">Update</a></li><br><br>
+  			<li> <a href="ReportInfectionManager.jsp"></a> </li>
   			<li><a href="about.html">About</a></li>
 		</ul>
 	</div>

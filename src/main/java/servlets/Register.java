@@ -37,7 +37,7 @@ public class Register extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String lastLatitude = request.getParameter("latitude");
 		String lastLongitude = request.getParameter("longitude");
-
+		
 		SurvivorController survivorController = new SurvivorController();
 		PrintWriter writer = response.getWriter();
 		
@@ -54,6 +54,7 @@ public class Register extends HttpServlet {
 			}
 			
 		} else {
+			
 			Survivor survivor = survivorController.getSurvivorById(Integer.parseInt(id));
 			survivor.setName(name);
 			survivor.setAge(Integer.parseInt(age));
